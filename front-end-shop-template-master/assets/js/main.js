@@ -21,7 +21,19 @@ if(target && target.matches('button.item-actions__cart')){
         .replace(' <sup>', '.')
         .replace('</sup>', '')
 
-   target.innerHTML = `Added ${mockData} $`;
+    cartPrice =  Math.round((cartPrice * 100) + (mockData * 100)) / 100;
+
+    const restoreHTML = target.innerHTML;
+
+    target.innerHTML = `Added ${cartPrice.toFixed(2)} $`;
+    target.disabled = true;
+    buttonsContainer.removeEventListener('click', btnClickHandler);
+
+    setTimeout(() => {
+      target.innerHTML = restoreHTML;
+      target.disabled = false;
+      buttonsContainer.addEventListener('click', btnClickHandler);
+    }, 2000);
  }   
 };
 
