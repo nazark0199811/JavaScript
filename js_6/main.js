@@ -29,7 +29,7 @@ console.log(replaceCSSComments('код /*к1*/ без /* к2 */ коммент/*
  * Функция получает строку, возвращает преобразованную строку.
  */
 function replaceHTMLComments(str) {
-return str.replace(/ /);
+return str.replace(/\<\!\-\-*.*?\-\-\>\s*/g, '');
 };
 
 console.log(replaceHTMLComments('<!--коммент1--> код без комментов <!--коммент2-->')); // код без комментов
@@ -43,13 +43,16 @@ console.log(replaceHTMLComments('код <!--к1--> без <!-- к2 --> комм�
  * С помощью test определите, что переданная строка заканчивается расширениями: jpg, jpeg, png.
  * Функция получает строку – имя файла, возвращает true или false.
  */
+function validateFileType(str) {
+return (/ /).test;
+}
 
-// console.log(validateFileType('image.png')); // true
-// console.log(validateFileType('image.html')); // false
-// console.log(validateFileType('image.file.jpg')); // true
-// console.log(validateFileType('image.png.file')); // false
-// console.log(validateFileType('image.png.jpeg')); // true
-// console.log(validateFileType('image.pngjpeg')); // false
+console.log(validateFileType('image.png')); // true
+console.log(validateFileType('image.html')); // false
+console.log(validateFileType('image.file.jpg')); // true
+console.log(validateFileType('image.png.file')); // false
+console.log(validateFileType('image.png.jpeg')); // true
+console.log(validateFileType('image.pngjpeg')); // false
 
 /*
  * #4
