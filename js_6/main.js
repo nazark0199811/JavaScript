@@ -29,7 +29,7 @@ console.log(replaceCSSComments('код /*к1*/ без /* к2 */ коммент/*
  * Функция получает строку, возвращает преобразованную строку.
  */
 function replaceHTMLComments(str) {
-return str.replace(/\<\!\-\-*.*?\-\-\>\s*/g, '');
+return str.replace(/\<\!\-\-*.*?\-\-\>\s*/g, '').trim();
 };
 
 console.log(replaceHTMLComments('<!--коммент1--> код без комментов <!--коммент2-->')); // код без комментов
@@ -44,8 +44,8 @@ console.log(replaceHTMLComments('код <!--к1--> без <!-- к2 --> комм�
  * Функция получает строку – имя файла, возвращает true или false.
  */
 function validateFileType(str) {
-return (/ /).test;
-}
+return (/\.+(png|jpeg|jpg)$/).test(str);
+};
 
 console.log(validateFileType('image.png')); // true
 console.log(validateFileType('image.html')); // false
@@ -62,17 +62,21 @@ console.log(validateFileType('image.pngjpeg')); // false
  * Функция получает строку – год, возвращает true или false.
  */
 
-// console.log(checkYear(1900)); // true
-// console.log(checkYear(2001)); // true
-// console.log(checkYear(2100)); // true
-// console.log(checkYear(1899)); // false
-// console.log(checkYear(20)); // false
-// console.log(checkYear(200)); // false
-// console.log(checkYear(20000)); // false
-// console.log(checkYear('20000')); // false
-// console.log(checkYear(19)); // false
-// console.log(checkYear('19')); // false
-// console.log(checkYear(2101)); // false
+function checkYear(str) {
+    return (/^(19\d\d|20\d\d|2100)$/).test(str)
+}
+
+console.log(checkYear(1900)); // true
+console.log(checkYear(2001)); // true
+console.log(checkYear(2100)); // true
+console.log(checkYear(1899)); // false
+console.log(checkYear(20)); // false
+console.log(checkYear(200)); // false
+console.log(checkYear(20000)); // false
+console.log(checkYear('20000')); // false
+console.log(checkYear(19)); // false
+console.log(checkYear('19')); // false
+console.log(checkYear(2101)); // false
 
 /*
  * #5
@@ -82,14 +86,18 @@ console.log(validateFileType('image.pngjpeg')); // false
  * Функция получает строку – имейл, возвращает true или false.
  */
 
-// console.log(checkEmail('mail@gmail.com')); // true
-// console.log(checkEmail('mail.name@mail.ua')); // true
-// console.log(checkEmail('mail-name@mail.ua')); // true
-// console.log(checkEmail('mail-name@mail.com.ua')); // true
-// console.log(checkEmail('mail@gmail')); // false
-// console.log(checkEmail('mail@gmail-com')); // false
-// console.log(checkEmail(' mail-name@mail.com.ua')); // false
-// console.log(checkEmail('mail-name@mail.com.ua ')); // false
+function checkEmail(str) {
+    return (/^[a-zA-Z0-9]+\W?[a-zA-Z0-9]+@[a-zA-Z\.]+\.[a-z]{2,3}$/).test(str);
+}
+
+console.log(checkEmail('mail@gmail.com')); // true
+console.log(checkEmail('mail.name@mail.ua')); // true
+console.log(checkEmail('mail-name@mail.ua')); // true
+console.log(checkEmail('mail-name@mail.com.ua')); // true
+console.log(checkEmail('mail@gmail')); // false
+console.log(checkEmail('mail@gmail-com')); // false
+console.log(checkEmail(' mail-name@mail.com.ua')); // false
+console.log(checkEmail('mail-name@mail.com.ua ')); // false
 
 /*
  * #6
@@ -101,22 +109,26 @@ console.log(validateFileType('image.pngjpeg')); // false
  *     http://site.ua, https://my-site.com, https://site.com.ua, https://subdomain.site.com.ua
  *         Функция получает строку – доменное имя, возвращает true или false.
  */
+function checkDomainUrl(str) {
+    return (/^(http:|https:)\/\/(?!:\/\/)([a-zA-Z0-9-_]+\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\.[a-zA-Z]{2,4}$/).test(str)
+}
 
-// console.log(checkDomainUrl('http://external.asd1230-123.asd_internal.asd.gm-_ail.com')); // true
-// console.log(checkDomainUrl('http://domain.com')); // true
-// console.log(checkDomainUrl('https://example.domain.com')); // true
-// console.log(checkDomainUrl('https://example.domain-hyphen.com')); // true
-// console.log(checkDomainUrl('http://example.domain-hyphen.com')); // true
-// console.log(checkDomainUrl('http://www.domain.com')); // true
-// console.log(checkDomainUrl('http://www.domain.info')); // true
-// console.log(checkDomainUrl('http://www')); // false
-// console.log(checkDomainUrl('https://domain')); // false
-// console.log(checkDomainUrl(' https://domain')); // false
-// console.log(checkDomainUrl('https://domain.com ')); // false
-// console.log(checkDomainUrl('example.museum')); // false
-// console.log(checkDomainUrl('example.domain-hyphen.com')); // false
-// console.log(checkDomainUrl('www.domain.com')); // false
-// console.log(checkDomainUrl('www.example.domain-hyphen.com')); // false
+
+console.log(checkDomainUrl('http://external.asd1230-123.asd_internal.asd.gm-_ail.com')); // true
+console.log(checkDomainUrl('http://domain.com')); // true
+console.log(checkDomainUrl('https://example.domain.com')); // true
+console.log(checkDomainUrl('https://example.domain-hyphen.com')); // true
+console.log(checkDomainUrl('http://example.domain-hyphen.com')); // true
+console.log(checkDomainUrl('http://www.domain.com')); // true
+console.log(checkDomainUrl('http://www.domain.info')); // true
+console.log(checkDomainUrl('http://www')); // false
+console.log(checkDomainUrl('https://domain')); // false
+console.log(checkDomainUrl(' https://domain')); // false
+console.log(checkDomainUrl('https://domain.com ')); // false
+console.log(checkDomainUrl('example.museum')); // false
+console.log(checkDomainUrl('example.domain-hyphen.com')); // false
+console.log(checkDomainUrl('www.domain.com')); // false
+console.log(checkDomainUrl('www.example.domain-hyphen.com')); // false
 
 /*
  * #7
@@ -127,8 +139,14 @@ console.log(validateFileType('image.pngjpeg')); // false
  * Функция получает произвольную строку текста с доменами (один и более), возвращает результат преобразования.
  * В данном задании требуется использовать метод match().
  */
+function createLinksFromDomains(str) {
+    let reg = new RegExp('(http:|https:)\\/\\/(?!:\\/\\/)([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\\.[a-zA-Z]{2,5}', 'gi');
+    str.match(reg).forEach((item) => str = str.replace(item, `<a href="${item}" target="_blank">${item.replace(/^(http:|https:)\/\//gi, '')}</a>`));
+    return str;
+}
+
 
 // <a href="http://site.ua">site.ua</a> text1 <a href="https://site.com">site.com</a> text2 <a href="https://site.com.ua">site.com.ua</a> text3 <a href="https://subdomain.my-site.com.ua">subdomain.my-site.com.ua</a> text4
-// console.log(createLinksFromDomains('http://site.ua text1 https://site.com text2 https://site.com.ua text3 https://subdomain.my-site.com.ua text4'));
+console.log(createLinksFromDomains('http://site.ua text1 https://site.com text2 https://site.com.ua text3 https://subdomain.my-site.com.ua text4'));
 // site.ua text1 <a href="https://site.com">site.com</a> text2 <a href="https://site.com.ua">site.com.ua</a> text3 subdomain.my-site.com.ua text4
-// console.log(createLinksFromDomains('site.ua text1 https://site.com text2 https://site.com.ua text3 subdomain.my-site.com.ua text4'));
+console.log(createLinksFromDomains('site.ua text1 https://site.com text2 https://site.com.ua text3 subdomain.my-site.com.ua text4'));
